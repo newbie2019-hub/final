@@ -2,6 +2,11 @@
 
 body, html {
  font-family: 'Open Sans', sans-serif !important;
+ background: #f7f7f7;
+}
+
+h1,h2,h3,h4,h5,h6,p {
+ margin-bottom: 0px !important;
 }
 
 .form-control:active {
@@ -14,4 +19,283 @@ body, html {
 
 a {
  text-decoration: none !important;
+}
+
+.sidenav {
+ position: fixed;
+ left: 0;
+ top: 0;
+ height: 100vh;
+ width: 250px;
+ background-color: #7DB4F5;
+}
+
+.sidenav a{
+ display: flex;
+ padding: 15px 40px;
+ color: white;
+}
+
+.sidenav a:hover {
+ background: #74aaec;
+ color: white;
+}
+
+.sidenav a i {
+ margin-right: 12px;
+}
+
+.router-link-active {
+ background: #5b9cec;
+}
+
+.close {
+ outline: none !important;
+ border: 0px !important;
+ background: white !important;
+ font-size: 1.2rem !important;
+}
+
+.navigation {
+ background-color: rgb(255, 255, 255);
+ width: calc(100% - 250px);
+ right: 0;
+ top: 0;
+ position: fixed;
+ height: 60px;
+ padding: 10px 15px;
+ box-shadow: 0px 4px 5px rgba(44, 44, 44, 0.068);
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ z-index: 2;
+}
+
+.username {
+ margin-left: 10px;
+}
+
+.content-container {
+ margin-left: 285px;
+ margin-top: 75px;
+}
+
+.hero {
+ height: 100vh;
+ background: linear-gradient(to right, rgba(49, 49, 49, 0.534), rgba(0, 0, 0, 0.712)), url('~@/assets/images/bg-hero.jpg');
+ background-attachment: fixed;
+ background-repeat: no-repeat;
+ background-size: cover;
+ position: relative;
+ width: 100%;
+}
+
+.index-navigation {
+ display: flex;
+ flex-direction: row;
+ justify-content: flex-end;
+ top: 0;
+ left: 0;
+ position: fixed;
+ width: 100%;
+ height: 90px;
+ align-items: center;
+ padding: 15px 50px;
+}
+
+.index-navigation a{
+ color: white;
+ padding: 6px 20px;
+}
+
+.index-navigation a:hover {
+ color: #5b9cec;
+}
+
+.hero-content {
+ display: flex;
+ width: 100%;
+ height: 100%;
+ flex-direction: column;
+ color: white;
+ align-items: center;
+ justify-content: center;
+}
+
+.quote {
+ font-size: 4rem;
+ width: 60%;
+ text-align: center;
+ line-height: 4.5rem;
+ font-weight: 700;
+}
+
+.quote-2 {
+ margin-top: 2rem;
+ width: 35%;
+ text-align: center;
+}
+
+.service-title {
+ font-size: 2rem;
+ color: #141414;
+}
+
+.service-description {
+ text-align: justify;
+ text-justify: inter-word;
+ margin-top: 1rem;
+}
+
+.service-spacing {
+ margin-left: 2rem;
+}
+
+
+.reservation {
+ margin-top: 2rem;
+ width: 100%;
+ background: #f0f0f0;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+.footer {
+ width: 100%;
+ background: #f0f0f0;
+ margin-top: 5rem;
+ position: relative;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-direction: column;
+ padding: 60px 20px;
+}
+
+.footer i {
+ padding: 15px 15px;
+}
+
+.footer-icons {
+ font-size: 3rem;
+ color: #0d6efd;
+}
+
+.card-title {
+ font-size: 1.2rem;
+ text-transform: uppercase;
+ font-weight: 600;
+}
+
+.card img {
+ filter: brightness(45%);
+}
+
+.event-card {
+ cursor: pointer;
+}
+
+.event-selected .card-body {
+ border: 2px solid #5b9cec;
+ box-shadow: 0px 0px 10px #0f0f0fc7;
+}
+
+/** Carousel */
+.carousel-indicators li {
+ box-sizing: content-box;
+ flex: 0 1 auto;
+ width: 30px;
+ height: 3px;
+ margin-right: 3px;
+ margin-left: 3px;
+ text-indent: -999px;
+ cursor: pointer;
+ background-color: #fff;
+ background-clip: padding-box;
+ border-top: 10px solid transparent;
+ border-bottom: 10px solid transparent;
+ opacity: .5;
+ transition: opacity .6s ease;
+}
+
+.scrolled {
+ background: rgba(248, 248, 248, 0.952);
+ box-shadow: 0px 0px 10px #1f29355d;
+ height: 62px;
+ z-index: 5;
+}
+
+.scrolled a {
+ color:rgb(0, 0, 0);
+}
+
+.mx-datepicker-range {
+ width: 100% !important;
+}
+
+@media only screen and (max-width: 990px){
+ .column-reverse {
+  flex-direction: column-reverse;
+ }
+}
+
+@media only screen and (max-width: 850px) {
+
+ .quote {
+  font-size: 3.4rem;
+  width: 70%;
+  line-height: 4rem;
+  font-weight: 700;
+ }
+
+ .quote-2{
+  margin-top: 1rem;
+  width: 45%;
+  font-size: .9rem;
+ }
+
+ .service-spacing {
+  margin-left: 0rem;
+ }
+
+ .service-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+ }
+
+ .service-description {
+  margin-top: .5rem;
+  font-size: .9rem;
+ }
+
+}
+
+
+@media only screen and (max-width: 600px) {
+ 
+ .quote {
+  font-size: 3rem;
+  width: 78%;
+  line-height: 3.5rem;
+  font-weight: 700;
+ }
+
+ .quote-2{
+  margin-top: 1rem;
+  width: 45%;
+  font-size: .9rem;
+ }
+
+ .service-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+ }
+
+ .service-description {
+  margin-top: .4rem;
+  font-size: .8rem;
+ }
 }

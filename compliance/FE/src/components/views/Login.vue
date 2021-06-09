@@ -18,8 +18,8 @@
             <label for="floatingPassword">Password</label>
          </div>         
          <div class="form-check mt-2">
-           <input type="checkbox" class="form-check-input" id="adminlogin">
-           <label class="form-check-label" for="adminlogin"><small>Admin login</small></label>
+           <input v-model="adminlogin" type="checkbox" class="form-check-input" id="adminlogin">
+           <label class="form-check-label"  for="adminlogin"><small>Admin login</small></label>
          </div>
          <div class="d-flex justify-content-center mt-4">
           <div class="col-12">
@@ -41,22 +41,41 @@ export default {
       data: {
         email: '',
         password: ''
-      }
+      },
+      adminlogin: false,
     }
   },
   mounted() {
    document.title ="Please Login"
   },
   methods: {
-    ...mapActions('auth', ['loginAccount']),
+    ...mapActions('auth', ['loginAccount', 'loginUserAccount']),
     async login(){
-      await this.loginAccount(this.data).then(res => {
-        console.log(res)
-        this.$toast.success('Welcome, User!');
-        this.$router.push('/dashboard');
-      }).catch(err => {
-        console.log(err.response)
-      })
+      if(this.adminlogin){
+        await this.loginAccount(this.data).then(res => {
+          if(res.status == 200)
+          {
+            this.$toast.success('Welcome, User!');
+            this.$router.push('/dashboard/home');
+          }
+          else 
+          {
+            this.$toast.error('Invalid Credentials')
+          }
+        })
+      }
+      else {
+        await this.loginUserAccount(this.data).then(res => {
+        if(res.status == 200)
+        {
+          this.$router.push('/');
+        }
+        else 
+        {
+          this.$toast.error('Invalid Credentials')
+        }
+      }) 
+      }
 
     }
   }

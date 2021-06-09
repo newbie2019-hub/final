@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Rates extends Model
 {
     use HasFactory;
-    protected $fillable = [];
+    protected $guarded = [];
 }

@@ -3,7 +3,7 @@ import API from '../../base/'
 export default {
   namespaced: true,
   state: {
-    user: '',
+    user: [],
     token: localStorage.getItem('auth') || ''
   },
   getters: {
@@ -18,8 +18,20 @@ export default {
     SET_ACC(state, data){
       state.user = data
     },
+    SET_USER_ACC(state, data) {
+      state.user = data
+    },
+    SET_USER_TOKEN(state, token) {
+     localStorage.setItem('auth', token)
+     localStorage.setItem('isUser', 'true')
+     state.token = token
+
+     const bearer_token = localStorage.getItem('auth') || ''
+     API.defaults.headers.common['Authorization'] = `Bearer ${bearer_token}`
+    },
     SET_AUTH_TOKEN(state, token) {
      localStorage.setItem('auth', token)
+     localStorage.setItem('isAdmin', 'true')
      state.token = token
 
      const bearer_token = localStorage.getItem('auth') || ''
@@ -27,7 +39,10 @@ export default {
     },
     UNSET_USER(state){
      localStorage.removeItem('auth');
+     localStorage.removeItem('isUser');
+     localStorage.removeItem('isAdmin');
      state.token = ''
+     state.user = ''
 
      API.defaults.headers.common['Authorization'] = ''
    } 
@@ -45,8 +60,20 @@ export default {
 
       return res;
     },
-    async signUpAccount({commit}, payload){
-      const res = await API.post('/auth/store', payload).then(res => {
+    async loginUserAccount({commit}, payload){
+      const res = await API.post('/auth/user/login', payload).then(res => {
+        commit('SET_USER_ACC', res.data.user)
+        commit('SET_USER_TOKEN', res.data.access_token)
+
+        return res;
+      }).catch(err => {
+       return err.response;
+      })
+
+      return res;
+    },
+    async createAccount({commit}, payload){
+      const res = await API.post('/auth/user/store', payload).then(res => {
 
         return res;
       }).catch(err => {
@@ -65,7 +92,17 @@ export default {
       return res;
     },
     async logoutUser({commit}){
-     const res = await API.post('auth/logout?token=' + localStorage.getItem('auth')).then(response => {
+     const res = await API.post('auth/admin/logout?token=' + localStorage.getItem('auth')).then(response => {
+       commit('UNSET_USER')
+       return response
+     }).catch(error => {
+       return error.response
+     });
+
+     return res;
+   },
+    async logoutAuthUser({commit}){
+     const res = await API.post('auth/user/logout?token=' + localStorage.getItem('auth')).then(response => {
        commit('UNSET_USER')
        return response
      }).catch(error => {
@@ -75,7 +112,7 @@ export default {
      return res;
    },
    async checkUser({commit}) {
-    const res = await API.post('auth/me?token=' + localStorage.getItem('auth')).then(res => {
+    const res = await API.post('auth/admin/me?token=' + localStorage.getItem('auth')).then(res => {
       commit('SET_ACC', res.data)
       return res;
     }).catch(error => {
@@ -83,6 +120,17 @@ export default {
     })
 
     return res;
-   }
+   },
+   async checkAuthUser({commit}) {
+    const res = await API.post('auth/user/me?token=' + localStorage.getItem('auth')).then(res => {
+      commit('SET_USER_ACC', res.data)
+
+      return res;
+    }).catch(error => {
+      return error.response;
+    })
+
+    return res;
+   },
   },
 }

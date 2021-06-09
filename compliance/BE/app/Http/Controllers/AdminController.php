@@ -13,20 +13,16 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:owner', ['except' => ['login']]);
     }
 
     public function login(Request $request)
     {
-        $credentials = ['email' => $request->email, 'password' => $request->password];
+        $credentials = request(['email', 'password']);
 
-        if (!$token = auth('admin')->attempt($credentials)) {
+        if (! $token = auth()->guard('owner')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        else {
-            return response()->json(['error' => 'Account is pending for approval'], 401);
-        }
-
 
         return $this->respondWithToken($token);
     }
@@ -61,6 +57,7 @@ class AdminController extends Controller
 
     public function logout()
     {
+
         auth()->logout();
         return response()->json(['message' => 'User logged out successfully!']);
     }

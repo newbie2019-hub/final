@@ -17,7 +17,9 @@ class CreateReservationsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('home_id')->constrained()->onDelete('cascade');
-            $table->string('schedule');
+            $table->string('start_date');
+            $table->string('end_date');
+            $table->string('status');
             $table->timestamps();
         });
     }
