@@ -98,6 +98,7 @@ export default {
       }
     },
     async saveUpdate(){
+      console.log('hi')
       if (this.event.title == '') return this.$toast.error('Title is required');
       if (this.event.description == '') return this.$toast.error('Description is required');
       if (this.event.rate == '') return this.$toast.error('Rate is required');
