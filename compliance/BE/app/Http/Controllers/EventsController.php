@@ -41,37 +41,6 @@ class EventsController extends Controller
         return response()->json(['msg' => 'Success'], 200);
     }
 
-    
-    public function update(Request $request, $id){
-        
-        $this->validate($request, [
-            'title' => 'required',
-            'description' => 'required',
-            'image' => 'required',
-        ]);
-
-        $home = Home::where('event_id', $id)->first();
-
-        if($home){
-
-            $event = Events::where('id', $home->events_id)->first();
-            $event->update(['title' => $request->title, 'description' => $request->description]);
-
-            $rate = Rates::where('id', $home->rates_id)->first();
-            $rate->update(['rate' => $request->rate]);
-
-            if($request->image){
-                $gallery = Gallery::where('id', $home->gallery_id)->first();
-                $gallery->update(['image' => $request->image]);
-            };
-
-            return response()->json(['msg' => 'Event updated successfully!'], 200);
-        }
-        else {
-            return response()->json(['msg' => 'Event not found'], 401);
-        }
-
-    }
 
     public function destroy($id){
         $info = Gallery::where('id', $id)->first();

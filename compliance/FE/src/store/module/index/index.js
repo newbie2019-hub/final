@@ -4,6 +4,7 @@ export default ({
  state: {
   result: '',
   events: '',
+  reservation_record: [],
  },
  actions: {
   async checkReservation({commit}, data){
@@ -34,6 +35,16 @@ export default ({
   })
 
   return res; 
+ },
+ async getReservations({commit}){
+  const res = await API.get('user/reservations').then(res => {
+    commit('SET_RESERVATION_RECORD', res.data)
+    return res;
+  }).catch(err => {
+    return err.response;
+  })
+
+  return res; 
  }
  
  },
@@ -43,6 +54,9 @@ export default ({
   },
   SET_EVENTS(state, data){
    state.events = data
+  },
+  SET_RESERVATION_RECORD(state, data){
+    state.reservation_record = data.data
   }
   
  },

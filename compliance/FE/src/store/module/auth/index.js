@@ -14,12 +14,17 @@ export default {
   mutations: {
     SET_AUTH_ACC(state, data) {
       state.user = data
+
     },
     SET_ACC(state, data){
       state.user = data
+      const bearer_token = localStorage.getItem('auth') || ''
+      API.defaults.headers.common['Authorization'] = `Bearer ${bearer_token}`
     },
     SET_USER_ACC(state, data) {
       state.user = data
+      const bearer_token = localStorage.getItem('auth') || ''
+      API.defaults.headers.common['Authorization'] = `Bearer ${bearer_token}`
     },
     SET_USER_TOKEN(state, token) {
      localStorage.setItem('auth', token)

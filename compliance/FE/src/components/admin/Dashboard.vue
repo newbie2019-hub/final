@@ -14,8 +14,9 @@
 import Sidenav from './components/Sidenav.vue'
 import Navbar from './components/Navbar.vue'
 export default { 
-  mounted() {
+  async mounted() {
     document.title = 'Dashboard'
+    await this.$store.dispatch('auth/checkUser')
   },
   components: {Sidenav, Navbar}
 }

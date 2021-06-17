@@ -4,9 +4,7 @@
      <div class="d-flex justify-content-center align-items-center h-100">
       <div class="col-8 col-sm-6 col-md-5 col-lg-3">
        <div class="card p-5">
-         <div class="register-button">
-          <router-link to="/register" class="mt-3 btn-register">Register <i class="bi bi-arrow-right-circle btn-icon-hover"></i></router-link>
-         </div>
+
          <h4 class="mb-3 mt-2">Login</h4>
          <p class="mb-4"><small>Welcome! Please fill in your email and password to sign-in.</small></p>
          <div class="form-floating mb-3">

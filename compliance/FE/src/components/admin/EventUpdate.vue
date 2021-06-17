@@ -103,7 +103,7 @@ export default {
       if (this.event.description == '') return this.$toast.error('Description is required');
       if (this.event.rate == '') return this.$toast.error('Rate is required');
 
-      if (this.fileRecordsForUpload.length == 0) {
+      if (this.fileRecordsForUpload.length != 0) {
         const img = await this.$refs.vueFileAgent.upload(
            `http://127.0.0.1:8000/api/admin/uploadFeaturedImage?token=` + localStorage.getItem("auth"), 
            {'X-Requested-With' : 'XMLHttpRequest'}, this.fileRecordsForUpload

@@ -234,6 +234,14 @@ a {
  width: 100% !important;
 }
 
+.no-reservation {
+ display: flex;
+ min-height: 300px;
+ max-height: 420px;
+ justify-content: center;
+ align-items: center;
+}
+
 @media only screen and (max-width: 990px){
  .column-reverse {
   flex-direction: column-reverse;

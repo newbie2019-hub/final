@@ -50,6 +50,11 @@ Route::group(['middleware' => 'api'], function () {
         Route::delete('reservation/{id}', [RecordController::class, 'destroy']);
     });
 });
+
+Route::group(['middleware' => 'api', 'prefix' => 'user'], function () {
+    Route::get('reservations', [UserController::class, 'getReservations']);
+});
+
 Route::post('reservation/check', [ReservationController::class, 'check_reservation']);
 Route::get('reservation/events', [HomeController::class, 'index']);
 Route::post('reservation/reserve', [ReservationController::class, 'reserve']);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -62,6 +63,11 @@ class UserController extends Controller
     public function me()
     {
         return response()->json(auth('api')->user());
+    }
+
+    public function getReservations(){
+        $reservation = Reservation::with(['home','home.event', 'home.gallery', 'home.rate'])->where('user_id', auth('api')->user()->id)->get();
+        return response()->json(['data' => $reservation]);
     }
 
 }
